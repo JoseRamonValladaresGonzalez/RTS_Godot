@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkhe3l3x58fnp"]
+
+[ext_resource type="Script" path="res://scripts/stone.gd" id="1_6wguj"]
+[ext_resource type="Texture2D" uid="uid://doolvqpo6yawl" path="res://sprites/stone_2.png" id="2_qqm0a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vokdf"]
+size = Vector2(86, 112)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6jgdo"]
+size = Vector2(64, 94)
+
+[node name="Stone" type="StaticBody2D" groups=["resources"]]
+collision_layer = 2
+script = ExtResource("1_6wguj")
+resource_amount = 200
+harvest_time = 4.0
+resource_type = "stone"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(26, 42)
+shape = SubResource("RectangleShape2D_vokdf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(25, 40)
+scale = Vector2(4.5, 5)
+texture = ExtResource("2_qqm0a")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -11.0
+offset_top = -35.0
+offset_right = 61.0
+offset_bottom = -8.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(25, 39)
+shape = SubResource("RectangleShape2D_6jgdo")

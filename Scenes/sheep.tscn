@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://cot17f01ipxgn"]
+
+[ext_resource type="Script" path="res://scripts/sheep.gd" id="1_20mep"]
+[ext_resource type="Texture2D" uid="uid://brffvv5asn48h" path="res://sprites/SheepIdle.png" id="1_jfj08"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vokdf"]
+size = Vector2(86, 112)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6jgdo"]
+size = Vector2(64, 94)
+
+[node name="sheep" type="StaticBody2D" groups=["resources"]]
+collision_layer = 2
+script = ExtResource("1_20mep")
+resource_amount = 50
+resource_type = "food"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(26, 42)
+shape = SubResource("RectangleShape2D_vokdf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["resources"]]
+position = Vector2(23, 44)
+scale = Vector2(1.25, 1.35938)
+texture = ExtResource("1_jfj08")
+hframes = 20
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -11.0
+offset_top = -35.0
+offset_right = 61.0
+offset_bottom = -8.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(25, 39)
+shape = SubResource("RectangleShape2D_6jgdo")

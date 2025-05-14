@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://c63dmshufu0cd"]
+
+[ext_resource type="PackedScene" uid="uid://bumskamcs8uyw" path="res://UI/ui.tscn" id="1_0rvul"]
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_d56de"]
+[ext_resource type="Script" path="res://scripts/camera.gd" id="2_kbcct"]
+[ext_resource type="PackedScene" uid="uid://b2cyav6mp0j4b" path="res://Scenes/unit.tscn" id="3_e0jy0"]
+[ext_resource type="PackedScene" uid="uid://bb6w585bffsg7" path="res://Scenes/tree.tscn" id="5_h332x"]
+[ext_resource type="PackedScene" uid="uid://dkhe3l3x58fnp" path="res://Scenes/stone.tscn" id="6_iokfy"]
+[ext_resource type="PackedScene" uid="uid://cvx6agoj4eipt" path="res://Scenes/gold.tscn" id="7_fnqud"]
+[ext_resource type="PackedScene" uid="uid://cot17f01ipxgn" path="res://Scenes/sheep.tscn" id="8_18t5e"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_d56de")
+
+[node name="UI" parent="." instance=ExtResource("1_0rvul")]
+
+[node name="Camera" type="Camera2D" parent="."]
+script = ExtResource("2_kbcct")
+
+[node name="Panel" type="Panel" parent="."]
+
+[node name="Units" type="Node2D" parent="."]
+
+[node name="Unit" parent="Units" instance=ExtResource("3_e0jy0")]
+
+[node name="Unit2" parent="Units" instance=ExtResource("3_e0jy0")]
+position = Vector2(138, 56)
+
+[node name="Unit3" parent="Units" instance=ExtResource("3_e0jy0")]
+position = Vector2(56, 43)
+
+[node name="Unit4" parent="Units" instance=ExtResource("3_e0jy0")]
+position = Vector2(87, -1)
+
+[node name="Tree" parent="." instance=ExtResource("5_h332x")]
+position = Vector2(204, 11)
+
+[node name="gold" parent="." instance=ExtResource("7_fnqud")]
+position = Vector2(-116, -104)
+
+[node name="Stone" parent="." instance=ExtResource("6_iokfy")]
+position = Vector2(-156, 64)
+
+[node name="sheep" parent="." instance=ExtResource("8_18t5e")]
+position = Vector2(83, -128)
+
+[editable path="UI"]

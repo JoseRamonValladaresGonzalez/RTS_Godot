@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2cyav6mp0j4b"]
+
+[ext_resource type="Texture2D" uid="uid://0r660h4knaed" path="res://sprites/Small-8-Direction-Characters_by_AxulArt.png" id="1_rib2x"]
+[ext_resource type="Script" path="res://scripts/unit.gd" id="1_xepyd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ijooa"]
+size = Vector2(23, 29)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1da6m"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 1, 0, 1)
+border_blend = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qurco"]
+radius = 21.0
+
+[node name="Unit" type="CharacterBody2D"]
+collision_mask = 6
+script = ExtResource("1_xepyd")
+separation_force = 500.0
+separation_radius = 200.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(11.5, 14.5)
+shape = SubResource("RectangleShape2D_ijooa")
+
+[node name="Small-8-direction-charactersByAxulArt" type="Sprite2D" parent="."]
+position = Vector2(11, 14)
+texture = ExtResource("1_rib2x")
+hframes = 8
+vframes = 12
+
+[node name="Box" type="Panel" parent="."]
+offset_right = 22.0
+offset_bottom = 30.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1da6m")
+
+[node name="SeparationArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SeparationArea"]
+position = Vector2(11, 15)
+shape = SubResource("CircleShape2D_qurco")
