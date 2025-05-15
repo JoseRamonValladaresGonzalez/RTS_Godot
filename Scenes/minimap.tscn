@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmtilhxtgjmwb"]
+
+[ext_resource type="Script" path="res://scripts/minimap.gd" id="1_3dl8r"]
+
+[node name="minimap" type="Control"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+script = ExtResource("1_3dl8r")
+world_bounds = Rect2(-2000, -2000, 4000, 4000)
+
+[node name="Background" type="ColorRect" parent="." groups=["UI"]]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.978173, 0.920419, 0.9814, 0.686275)
+
+[node name="MarkersContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="ClickArea" type="Button" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_bottom = 200.0
+grow_horizontal = 0
+focus_mode = 0
+flat = true
+expand_icon = true

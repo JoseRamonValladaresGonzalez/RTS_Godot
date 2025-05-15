@@ -23,6 +23,9 @@ Global="*res://scripts/global.gd"
 trees=""
 resources=""
 stones=""
+UI=""
+units=""
+buildings=""
 
 [input]
 

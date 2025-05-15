@@ -12,6 +12,7 @@ size = Vector2(64, 94)
 [node name="Tree" type="StaticBody2D" groups=["resources"]]
 collision_layer = 2
 script = ExtResource("1_sbsip")
+resource_amount = 200
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2

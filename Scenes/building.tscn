@@ -1,16 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://16ktk10rfydd"]
+[gd_scene load_steps=6 format=3 uid="uid://16ktk10rfydd"]
 
-[ext_resource type="Texture2D" uid="uid://dd5u1eccpyxw1" path="res://sprites/gold_bar.png" id="1_n6qkx"]
+[ext_resource type="Texture2D" uid="uid://b7r14cmi8akdp" path="res://sprites/house.png" id="1_1s0py"]
+[ext_resource type="Script" path="res://scripts/house.gd" id="1_4lo8h"]
+[ext_resource type="Texture2D" uid="uid://c0y3rsmqafk8f" path="res://sprites/Image10000.png" id="3_3pqg8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wbqgg"]
 size = Vector2(91, 91)
 
-[node name="Building" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8mf45"]
+size = Vector2(184, 153)
+
+[node name="House" type="Node2D" groups=["buildings"]]
+position = Vector2(57, 124)
+script = ExtResource("1_4lo8h")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(37, 38)
-scale = Vector2(5.625, 5.75)
-texture = ExtResource("1_n6qkx")
+visible = false
+position = Vector2(34, 41)
+scale = Vector2(0.247037, 0.229634)
+texture = ExtResource("1_1s0py")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 4
@@ -19,3 +27,55 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(35.5, 35.5)
 shape = SubResource("RectangleShape2D_wbqgg")
+
+[node name="HouseButton" type="TextureButton" parent="."]
+offset_left = -33.0
+offset_top = -26.0
+offset_right = 106.0
+offset_bottom = 108.0
+mouse_filter = 2
+texture_normal = ExtResource("1_1s0py")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -123.0
+offset_right = 82.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_3pqg8")
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Food = 20 Wood =10"
+
+[node name="UnitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Summon
+"
+
+[node name="MenuArea" type="Area2D" parent="."]
+
+[node name="MenuShape" type="CollisionShape2D" parent="MenuArea"]
+position = Vector2(38, -45.5)
+shape = SubResource("RectangleShape2D_8mf45")
+
+[connection signal="mouse_entered" from="HouseButton" to="." method="_on_house_button_mouse_entered"]
+[connection signal="mouse_exited" from="HouseButton" to="." method="_on_house_button_mouse_exited"]
+[connection signal="pressed" from="HouseButton" to="." method="_on_house_button_pressed"]
+[connection signal="pressed" from="HouseButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/UnitButton" to="." method="_on_unit_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/UnitButton" to="." method="_on_button_pressed"]
+[connection signal="area_entered" from="MenuArea" to="." method="_on_menu_area_area_entered"]
+[connection signal="area_exited" from="MenuArea" to="." method="_on_menu_area_area_exited"]
