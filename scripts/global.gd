@@ -2,10 +2,10 @@
 extends Node
 
 # Recursos
-static var wood = 200
-static var stone = 200
-static var gold = 200
-static var food = 200
+static var wood = 0
+static var stone = 0
+static var gold = 0
+static var food = 0
 
 # Costos de edificios (ahora es un diccionario normal)
 static var building_costs = {
@@ -43,27 +43,3 @@ static func deduct_resources(building_type: String):
 				gold -= costs[resource]
 			"food":
 				food -= costs[resource]
-
-
-static var unit_costs = {
-	"villager": {"food": 20, "wood": 10}
-}
-
-static func can_afford_unit(unit_type: String) -> bool:
-	var costs = unit_costs.get(unit_type, {})
-	for resource in costs:
-		match resource:
-			"wood": if wood < costs[resource]: return false
-			"food": if food < costs[resource]: return false
-			"stone": if stone < costs[resource]: return false
-			"gold": if gold < costs[resource]: return false
-	return true
-
-static func deduct_unit_cost(unit_type: String):
-	var costs = unit_costs.get(unit_type, {})
-	for resource in costs:
-		match resource:
-			"wood": wood -= costs[resource]
-			"food": food -= costs[resource]
-			"stone": stone -= costs[resource]
-			"gold": gold -= costs[resource]

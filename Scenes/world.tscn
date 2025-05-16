@@ -1,34 +1,20 @@
-[gd_scene load_steps=10 format=3 uid="uid://c63dmshufu0cd"]
+[gd_scene load_steps=9 format=3 uid="uid://c63dmshufu0cd"]
 
 [ext_resource type="PackedScene" uid="uid://bumskamcs8uyw" path="res://UI/ui.tscn" id="1_0rvul"]
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_d56de"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="2_kbcct"]
 [ext_resource type="PackedScene" uid="uid://b2cyav6mp0j4b" path="res://Scenes/unit.tscn" id="3_e0jy0"]
-[ext_resource type="PackedScene" uid="uid://dmtilhxtgjmwb" path="res://Scenes/minimap.tscn" id="3_j3hwp"]
 [ext_resource type="PackedScene" uid="uid://bb6w585bffsg7" path="res://Scenes/tree.tscn" id="5_h332x"]
 [ext_resource type="PackedScene" uid="uid://dkhe3l3x58fnp" path="res://Scenes/stone.tscn" id="6_iokfy"]
 [ext_resource type="PackedScene" uid="uid://cvx6agoj4eipt" path="res://Scenes/gold.tscn" id="7_fnqud"]
 [ext_resource type="PackedScene" uid="uid://cot17f01ipxgn" path="res://Scenes/sheep.tscn" id="8_18t5e"]
 
 [node name="World" type="Node2D"]
-position = Vector2(569, 260)
 script = ExtResource("1_d56de")
 
 [node name="UI" parent="." instance=ExtResource("1_0rvul")]
 
-[node name="minimap" parent="UI" node_paths=PackedStringArray("camera") instance=ExtResource("3_j3hwp")]
-offset_left = -197.0
-offset_top = 452.0
-offset_right = 3.0
-offset_bottom = 652.0
-camera_path = NodePath("../../Camera")
-camera = NodePath("../../Camera")
-
 [node name="Camera" type="Camera2D" parent="."]
-limit_left = -2000
-limit_top = -2000
-limit_right = 2000
-limit_bottom = 2000
 script = ExtResource("2_kbcct")
 
 [node name="Panel" type="Panel" parent="."]
@@ -58,19 +44,4 @@ position = Vector2(-156, 64)
 [node name="sheep" parent="." instance=ExtResource("8_18t5e")]
 position = Vector2(83, -128)
 
-[node name="ColorRect" type="ColorRect" parent="."]
-z_index = -2
-custom_minimum_size = Vector2(2000, 4000)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1000.0
-offset_top = -1000.0
-offset_right = 1000.0
-offset_bottom = 1000.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0.4, 0, 1)
+[editable path="UI"]
