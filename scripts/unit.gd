@@ -4,6 +4,12 @@ extends CharacterBody2D
 	set(value):
 		selected = value
 		box.visible = selected
+@export var max_health: int = 10
+var health: int = max_health:
+	set(value):
+		health = clamp(value, 0, max_health)
+		if health <= 0:
+			die()
 
 @export var speed: float = 200.0
 @export var separation_force: float = 300.0
@@ -12,15 +18,38 @@ extends CharacterBody2D
 @onready var box: Panel = $Box
 @onready var separation_area: Area2D = $SeparationArea
 signal moving_started
+signal died
 var target_position: Vector2 = Vector2.ZERO
 var moving: bool = false
 var target_resource: Node = null
 
 var nearby_units: Array = []
 
+@export var attack_range: float = 150.0
+@export var attack_damage: int = 1
+@export var attack_cooldown: float = 1.0
+
+var attack_target: Node = null
+var can_attack: bool = true
+var is_attacking: bool = false
+
+
 func _ready():
 	box.visible = selected
 	setup_separation_area()
+	$AttackCooldown.timeout.connect(_on_attack_cooldown_timeout)
+	health = max_health
+
+func take_damage(amount: int):
+	health -= amount
+
+func die():
+	# Añadir estas líneas antes de queue_free()
+	if attack_target != null && attack_target.has_method("update_targets"):
+		attack_target.update_targets(self)
+	emit_signal("died")
+	queue_free()
+
 
 func setup_separation_area():
 	var shape = CircleShape2D.new()
@@ -54,6 +83,8 @@ func _physics_process(delta: float):
 		move_and_slide()
 		check_arrival()
 		check_collisions()
+	elif attack_target and is_attacking:
+		handle_attack()
 
 func calculate_separation() -> Vector2:
 	var separation_vector = Vector2.ZERO
@@ -89,3 +120,47 @@ func _on_body_entered(body: Node):
 func _on_body_exited(body: Node):
 	if body in nearby_units:
 		nearby_units.erase(body)
+
+func handle_attack():
+	if !attack_target or !is_instance_valid(attack_target):
+		stop_attacking()
+		return
+	
+	# Rotar hacia el objetivo
+	look_at(attack_target.global_position)
+	
+	if global_position.distance_to(attack_target.global_position) > attack_range:
+		move_to(attack_target.global_position)
+	elif can_attack:
+		shoot_projectile()
+		can_attack = false
+		$AttackCooldown.start(attack_cooldown)
+
+func shoot_projectile():
+	if !attack_target or !is_instance_valid(attack_target):
+		return
+	
+	var projectile = preload("res://Scenes/projectile.tscn").instantiate()
+	projectile.init(attack_target, attack_damage)
+	# Añadir al mundo con parámetros correctos
+	get_parent().get_parent().add_child(projectile)  # Ajusta según tu estructura
+	projectile.global_position = global_position
+	projectile.rotation = (attack_target.global_position - global_position).angle()
+
+func stop_attacking():
+	is_attacking = false
+	attack_target = null
+	moving = false
+
+func _on_attack_cooldown_timeout():
+	can_attack = true
+
+func attack(target: Node):
+	if !target.is_in_group("enemies"):
+		return
+	
+	attack_target = target
+	is_attacking = true
+	moving = false
+	# Forzar actualización inmediata
+	_physics_process(0)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c63dmshufu0cd"]
+[gd_scene load_steps=11 format=3 uid="uid://c63dmshufu0cd"]
 
 [ext_resource type="PackedScene" uid="uid://bumskamcs8uyw" path="res://UI/ui.tscn" id="1_0rvul"]
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_d56de"]
@@ -8,13 +8,31 @@
 [ext_resource type="PackedScene" uid="uid://dkhe3l3x58fnp" path="res://Scenes/stone.tscn" id="6_iokfy"]
 [ext_resource type="PackedScene" uid="uid://cvx6agoj4eipt" path="res://Scenes/gold.tscn" id="7_fnqud"]
 [ext_resource type="PackedScene" uid="uid://cot17f01ipxgn" path="res://Scenes/sheep.tscn" id="8_18t5e"]
+[ext_resource type="PackedScene" uid="uid://dmtilhxtgjmwb" path="res://Scenes/minimap.tscn" id="9_x3o70"]
+[ext_resource type="PackedScene" uid="uid://de7wx35atixhc" path="res://Scenes/spawn_point.tscn" id="10_quwhb"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_d56de")
 
 [node name="UI" parent="." instance=ExtResource("1_0rvul")]
 
+[node name="minimap" parent="UI" node_paths=PackedStringArray("main_camera") instance=ExtResource("9_x3o70")]
+anchors_preset = 3
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -196.0
+offset_top = -196.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_vertical = 0
+main_camera = NodePath("../../Camera")
+
 [node name="Camera" type="Camera2D" parent="."]
+limit_left = -2000
+limit_top = -2000
+limit_right = 2000
+limit_bottom = 2000
+limit_smoothed = true
 script = ExtResource("2_kbcct")
 
 [node name="Panel" type="Panel" parent="."]
@@ -42,6 +60,194 @@ position = Vector2(-116, -104)
 position = Vector2(-156, 64)
 
 [node name="sheep" parent="." instance=ExtResource("8_18t5e")]
-position = Vector2(83, -128)
+position = Vector2(-553, 430)
 
-[editable path="UI"]
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -2
+custom_minimum_size = Vector2(4000, 4000)
+offset_left = -2098.0
+offset_top = -1790.0
+offset_right = 1902.0
+offset_bottom = 2210.0
+mouse_filter = 2
+color = Color(0, 0.945098, 0.360784, 0.705882)
+
+[node name="SpawnPoint" parent="." instance=ExtResource("10_quwhb")]
+position = Vector2(1239, -1376)
+
+[node name="Tree2" parent="." instance=ExtResource("5_h332x")]
+position = Vector2(205, 124)
+
+[node name="Tree3" parent="." instance=ExtResource("5_h332x")]
+position = Vector2(292, 123)
+
+[node name="Tree5" parent="." instance=ExtResource("5_h332x")]
+position = Vector2(206, -103)
+
+[node name="Tree4" parent="." instance=ExtResource("5_h332x")]
+position = Vector2(289, 8)
+
+[node name="Tree6" parent="." instance=ExtResource("5_h332x")]
+position = Vector2(378, -102)
+
+[node name="Tree7" parent="." instance=ExtResource("5_h332x")]
+position = Vector2(374, 2)
+
+[node name="Tree8" parent="." instance=ExtResource("5_h332x")]
+position = Vector2(292, -105)
+
+[node name="Tree9" parent="." instance=ExtResource("5_h332x")]
+position = Vector2(378, 116)
+
+[node name="Tree10" parent="." instance=ExtResource("5_h332x")]
+position = Vector2(463, 2)
+
+[node name="sheep2" parent="." instance=ExtResource("8_18t5e")]
+position = Vector2(-717, 426)
+
+[node name="sheep3" parent="." instance=ExtResource("8_18t5e")]
+position = Vector2(-1210, 996)
+
+[node name="sheep4" parent="." instance=ExtResource("8_18t5e")]
+position = Vector2(-1166, 1381)
+
+[node name="sheep5" parent="." instance=ExtResource("8_18t5e")]
+position = Vector2(327, 1086)
+
+[node name="sheep6" parent="." instance=ExtResource("8_18t5e")]
+position = Vector2(1073, -364)
+
+[node name="sheep7" parent="." instance=ExtResource("8_18t5e")]
+position = Vector2(-590, -833)
+
+[node name="sheep8" parent="." instance=ExtResource("8_18t5e")]
+position = Vector2(-1634, -660)
+
+[node name="sheep9" parent="." instance=ExtResource("8_18t5e")]
+position = Vector2(-1764, 351)
+
+[node name="sheep10" parent="." instance=ExtResource("8_18t5e")]
+position = Vector2(394, 1347)
+
+[node name="sheep11" parent="." instance=ExtResource("8_18t5e")]
+position = Vector2(604, 1188)
+
+[node name="sheep12" parent="." instance=ExtResource("8_18t5e")]
+position = Vector2(527, 938)
+
+[node name="sheep13" parent="." instance=ExtResource("8_18t5e")]
+position = Vector2(231, 1255)
+
+[node name="sheep14" parent="." instance=ExtResource("8_18t5e")]
+position = Vector2(561, 1368)
+
+[node name="Stone2" parent="." instance=ExtResource("6_iokfy")]
+position = Vector2(-251, 66)
+
+[node name="Stone3" parent="." instance=ExtResource("6_iokfy")]
+position = Vector2(-156, 183)
+
+[node name="Stone4" parent="." instance=ExtResource("6_iokfy")]
+position = Vector2(-251, 183)
+
+[node name="Stone5" parent="." instance=ExtResource("6_iokfy")]
+position = Vector2(-782, 209)
+
+[node name="Stone6" parent="." instance=ExtResource("6_iokfy")]
+position = Vector2(-777, 88)
+
+[node name="Stone7" parent="." instance=ExtResource("6_iokfy")]
+position = Vector2(-874, 76)
+
+[node name="Stone8" parent="." instance=ExtResource("6_iokfy")]
+position = Vector2(-896, 204)
+
+[node name="Stone9" parent="." instance=ExtResource("6_iokfy")]
+position = Vector2(502, 663)
+
+[node name="Stone10" parent="." instance=ExtResource("6_iokfy")]
+position = Vector2(507, 542)
+
+[node name="Stone11" parent="." instance=ExtResource("6_iokfy")]
+position = Vector2(410, 530)
+
+[node name="Stone12" parent="." instance=ExtResource("6_iokfy")]
+position = Vector2(388, 658)
+
+[node name="Stone13" parent="." instance=ExtResource("6_iokfy")]
+position = Vector2(-829, -267)
+
+[node name="Stone14" parent="." instance=ExtResource("6_iokfy")]
+position = Vector2(-824, -388)
+
+[node name="Stone15" parent="." instance=ExtResource("6_iokfy")]
+position = Vector2(-921, -400)
+
+[node name="Stone16" parent="." instance=ExtResource("6_iokfy")]
+position = Vector2(-943, -272)
+
+[node name="Stone17" parent="." instance=ExtResource("6_iokfy")]
+position = Vector2(745, -565)
+
+[node name="Stone18" parent="." instance=ExtResource("6_iokfy")]
+position = Vector2(750, -686)
+
+[node name="Stone19" parent="." instance=ExtResource("6_iokfy")]
+position = Vector2(653, -698)
+
+[node name="Stone20" parent="." instance=ExtResource("6_iokfy")]
+position = Vector2(631, -570)
+
+[node name="gold2" parent="." instance=ExtResource("7_fnqud")]
+position = Vector2(-309, -118)
+
+[node name="gold3" parent="." instance=ExtResource("7_fnqud")]
+position = Vector2(-209, -111)
+
+[node name="gold4" parent="." instance=ExtResource("7_fnqud")]
+position = Vector2(707, -182)
+
+[node name="gold5" parent="." instance=ExtResource("7_fnqud")]
+position = Vector2(807, -175)
+
+[node name="gold6" parent="." instance=ExtResource("7_fnqud")]
+position = Vector2(-1015, 588)
+
+[node name="gold7" parent="." instance=ExtResource("7_fnqud")]
+position = Vector2(-915, 595)
+
+[node name="gold8" parent="." instance=ExtResource("7_fnqud")]
+position = Vector2(-1064, -660)
+
+[node name="gold9" parent="." instance=ExtResource("7_fnqud")]
+position = Vector2(-964, -653)
+
+[node name="gold10" parent="." instance=ExtResource("7_fnqud")]
+position = Vector2(796, 794)
+
+[node name="gold11" parent="." instance=ExtResource("7_fnqud")]
+position = Vector2(896, 801)
+
+[node name="gold12" parent="." instance=ExtResource("7_fnqud")]
+position = Vector2(-452, 1186)
+
+[node name="gold13" parent="." instance=ExtResource("7_fnqud")]
+position = Vector2(-352, 1193)
+
+[node name="gold14" parent="." instance=ExtResource("7_fnqud")]
+position = Vector2(-1685, 1215)
+
+[node name="gold15" parent="." instance=ExtResource("7_fnqud")]
+position = Vector2(-1585, 1222)
+
+[node name="SpawnPoint2" parent="." instance=ExtResource("10_quwhb")]
+position = Vector2(-1110, -1400)
+spawn_interval = 10.0
+
+[node name="SpawnPoint3" parent="." instance=ExtResource("10_quwhb")]
+position = Vector2(1107, 1681)
+spawn_interval = 15.0
+
+[node name="SpawnPoint4" parent="." instance=ExtResource("10_quwhb")]
+position = Vector2(-667, 1645)
+spawn_interval = 20.0

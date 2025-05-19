@@ -1,16 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://16ktk10rfydd"]
+[gd_scene load_steps=6 format=3 uid="uid://16ktk10rfydd"]
 
-[ext_resource type="Texture2D" uid="uid://dd5u1eccpyxw1" path="res://sprites/gold_bar.png" id="1_n6qkx"]
+[ext_resource type="Texture2D" uid="uid://b7r14cmi8akdp" path="res://sprites/house.png" id="1_v4s1d"]
+[ext_resource type="Script" path="res://scripts/house.gd" id="1_yxats"]
+[ext_resource type="Texture2D" uid="uid://c0y3rsmqafk8f" path="res://sprites/Image10000.png" id="3_hdleo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wbqgg"]
 size = Vector2(91, 91)
 
-[node name="Building" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p0pxd"]
+size = Vector2(70, 86.5)
+
+[node name="House" type="Node2D"]
+position = Vector2(140, 129)
+script = ExtResource("1_yxats")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(37, 38)
-scale = Vector2(5.625, 5.75)
-texture = ExtResource("1_n6qkx")
+position = Vector2(37, 40)
+scale = Vector2(0.262608, 0.224892)
+texture = ExtResource("1_v4s1d")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 4
@@ -19,3 +26,31 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(35.5, 35.5)
 shape = SubResource("RectangleShape2D_wbqgg")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="ClickArea" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(38, 34.25)
+shape = SubResource("RectangleShape2D_p0pxd")
+
+[node name="HouseMenu" type="VBoxContainer" parent="."]
+offset_left = -26.0
+offset_top = -97.0
+offset_right = 104.0
+offset_bottom = -3.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HouseMenu"]
+layout_mode = 2
+texture = ExtResource("3_hdleo")
+
+[node name="Label" type="Label" parent="HouseMenu"]
+layout_mode = 2
+text = "Food 20 wood 10"
+
+[node name="SummonButton" type="Button" parent="HouseMenu"]
+layout_mode = 2
+text = "Summon"
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="pressed" from="HouseMenu/SummonButton" to="." method="_on_summon_button_pressed"]

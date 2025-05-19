@@ -5,12 +5,13 @@ extends CanvasLayer
 @onready var stone: Label = $VBoxContainer/stone
 
 @onready var gold: Label = $VBoxContainer/gold
+@onready var tower_button: Button = $VBoxContainer/TowerButton
 
 @onready var food: Label = $VBoxContainer/food
 @onready var build_button: Button = $VBoxContainer/build_button
 var building_selected = false
 var building_type = null 
-
+var building_mode_active: bool = false 
 
 func _process(delta: float) -> void:
 	wood.text = "Wood = " + str(Global.wood)
@@ -21,18 +22,25 @@ func _process(delta: float) -> void:
 
 var building_costs = {
 	"house": {"wood": 100, "stone": 50},
-	"farm": {"wood": 50, "food": 30}
+	"farm": {"wood": 50, "food": 30},
+	"turret": {"wood": 150, "stone": 200}
 }
 
 signal building_mode_changed(enabled: bool, type: String)
 
 func _on_build_button_pressed() -> void:
-	if Global.can_afford("house"):  # Ahora usa el método estático corregido
-		building_selected = true
-		building_type = "house"
-		building_mode_changed.emit(true, "house")
+	if building_mode_active:
+		# Si ya está en modo construcción, cancelar
+		building_mode_active = false
+		building_type = null
+		building_mode_changed.emit(false, "")
 	else:
-		print("No tienes suficientes recursos!")
+		if can_afford("house"):
+			building_mode_active = true
+			building_type = "house"
+			building_mode_changed.emit(true, "house")
+		else:
+			print("No tienes suficientes recursos para una casa!")
 
 func can_afford(building: String) -> bool:
 	var costs = building_costs.get(building, {})
@@ -40,3 +48,18 @@ func can_afford(building: String) -> bool:
 		if Global.get(resource) < costs[resource]:
 			return false
 	return true
+
+
+func _on_tower_button_pressed() -> void:
+	if building_mode_active:
+		# Si ya está en modo construcción, cancelar
+		building_mode_active = false
+		building_type = null
+		building_mode_changed.emit(false, "")
+	else:
+		if can_afford("turret"):
+			building_mode_active = true
+			building_type = "turret"
+			building_mode_changed.emit(true, "turret")
+		else:
+			print("No tienes suficientes recursos para una torreta!")

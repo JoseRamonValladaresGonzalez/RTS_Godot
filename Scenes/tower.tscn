@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfti005kvsecn"]
+
+[ext_resource type="Script" path="res://scripts/turret.gd" id="1_n7bls"]
+[ext_resource type="Texture2D" uid="uid://ddjcqjksxxoan" path="res://sprites/Tower 04 - Level 02 - Weapon.png" id="1_o40tg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fu48"]
+size = Vector2(91, 91)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ilahh"]
+radius = 273.046
+
+[node name="Tower" type="Node2D"]
+script = ExtResource("1_n7bls")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(21, 27)
+scale = Vector2(1.42593, 1.21875)
+texture = ExtResource("1_o40tg")
+hframes = 20
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(35.5, 35.5)
+shape = SubResource("RectangleShape2D_7fu48")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+light_mask = 8
+visibility_layer = 8
+position = Vector2(37, 36)
+shape = SubResource("CircleShape2D_ilahh")
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="ShootingPoint" type="Marker2D" parent="."]
+position = Vector2(35, 72)
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

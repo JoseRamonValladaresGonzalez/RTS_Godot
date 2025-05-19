@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b2cyav6mp0j4b"]
 
-[ext_resource type="Texture2D" uid="uid://0r660h4knaed" path="res://sprites/Small-8-Direction-Characters_by_AxulArt.png" id="1_rib2x"]
 [ext_resource type="Script" path="res://scripts/unit.gd" id="1_xepyd"]
+[ext_resource type="Texture2D" uid="uid://08mktrlgqtun" path="res://icon.svg" id="2_t2p2l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ijooa"]
 size = Vector2(23, 29)
@@ -18,7 +18,7 @@ border_blend = true
 [sub_resource type="CircleShape2D" id="CircleShape2D_qurco"]
 radius = 21.0
 
-[node name="Unit" type="CharacterBody2D"]
+[node name="Unit" type="CharacterBody2D" groups=["unit"]]
 collision_mask = 6
 script = ExtResource("1_xepyd")
 separation_force = 500.0
@@ -29,10 +29,9 @@ position = Vector2(11.5, 14.5)
 shape = SubResource("RectangleShape2D_ijooa")
 
 [node name="Small-8-direction-charactersByAxulArt" type="Sprite2D" parent="."]
-position = Vector2(11, 14)
-texture = ExtResource("1_rib2x")
-hframes = 8
-vframes = 12
+position = Vector2(11, 15)
+scale = Vector2(0.171875, 0.234375)
+texture = ExtResource("2_t2p2l")
 
 [node name="Box" type="Panel" parent="."]
 offset_right = 22.0
@@ -44,3 +43,5 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_1da6m")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SeparationArea"]
 position = Vector2(11, 15)
 shape = SubResource("CircleShape2D_qurco")
+
+[node name="AttackCooldown" type="Timer" parent="."]

@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="RTS"
+run/main_scene="res://Scenes/world.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -23,6 +24,9 @@ Global="*res://scripts/global.gd"
 trees=""
 resources=""
 stones=""
+unit=""
+UI=""
+enemies=""
 
 [input]
 
@@ -49,9 +53,11 @@ move_left={
 
 [layer_names]
 
+2d_render/layer_4="Minimap"
 2d_physics/layer_1="units"
 2d_physics/layer_2="trees"
 2d_physics/layer_3="terrain"
+2d_physics/layer_4="enemies"
 
 [rendering]
 

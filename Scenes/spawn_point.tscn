@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://de7wx35atixhc"]
+
+[ext_resource type="Script" path="res://scripts/spawn_point.gd" id="1_irogy"]
+[ext_resource type="PackedScene" uid="uid://bpn5opc6pj2l4" path="res://Scenes/enemy.tscn" id="2_2vxj3"]
+
+[node name="SpawnPoint" type="Marker2D"]
+script = ExtResource("1_irogy")
+enemy_scene = ExtResource("2_2vxj3")
+
+[node name="Timer" type="Timer" parent="."]
